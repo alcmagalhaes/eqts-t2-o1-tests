@@ -28,11 +28,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: |
+        git clone https://github.com/alcmagalhaes/juice-shop.git
+        cd juice-shop  
+        npm install
     - name: Running Horusec Security
       run: |
-        git clone https://github.com/juice-shop/juice-shop.git
-        cd juice-shop
-        npm shrinkwrap
-        npm install
         curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest
         horusec start -p="./" -e="true"        
