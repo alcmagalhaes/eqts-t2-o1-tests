@@ -21,15 +21,13 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Checkout repository
-      run: |
-        git clone https://github.com/MicrosoftDocs/pipelines-dotnet-core.git
-        cd pipelines-dotnet-core
+      run: git clone https://github.com/MicrosoftDocs/pipelines-dotnet-core.git
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./pipelines-dotnet-core
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore ./pipelines-dotnet-core
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal ./pipelines-dotnet-core
     - name: SAST
       run: |
         curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta 
